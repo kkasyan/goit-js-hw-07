@@ -22,36 +22,24 @@ galleryEl.addEventListener("click", onImageClick);
 
 function onImageClick({ target }) {
   event.preventDefault();
-  //   window.addEventListener("keydown", onEscapePress);
+
   if (target.nodeName !== "IMG") {
     return;
   }
 
-  const instance = basicLightbox.create(`
+  const instance = basicLightbox.create(
+    `
     <img src='${target.dataset.source}' width="800" height="600">
-`);
-  {
-    onShow: (instance) => {
-      document.addEventListener("keydown", (evt) => {
-        if (evt.key === "Escape") {
-          return instance.close();
-        }
-      });
-    };
-    onClose: (instance) => {
-      document.addEventListener("keydown", (evt) => {
-        if (evt.key === "Escape") {
-          return instance.close();
-        }
-      });
-    };
-  }
-  //   function onEscapePress(evt) {
-  //     if (evt.key === "Escape") {
-  //       instance.close();
-  //       window.removeEventListener("keydown", onEscapePress);
-  //       console.log(event.key);
-  //     }
-  //   }
+`,
+    {
+      onShow: (instance) => {
+        document.addEventListener("keydown", (evt) => {
+          if (evt.key === "Escape") {
+            return instance.close();
+          }
+        });
+      },
+    }
+  );
   instance.show();
 }
